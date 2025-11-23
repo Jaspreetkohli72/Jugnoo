@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugnoo | Smart Home Automation in Raipur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        jugnoo: {
+                            gold: '#FFD700',
+                            amber: '#F59E0B',
+                            dark: '#0F172A',
+                            black: '#020617'
+                        }
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #F59E0B' },
+                            '100%': { boxShadow: '0 0 20px #FFD700, 0 0 10px #F59E0B' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+        }
+
+        .hero-pattern {
+            background-color: #020617;
+            background-image: radial-gradient(#F59E0B 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+
+<body class="bg-jugnoo-black text-slate-200 font-sans antialiased selection:bg-jugnoo-amber selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-jugnoo-gold to-jugnoo-amber flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                        <i class="fa-solid fa-lightbulb text-jugnoo-black text-xl"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-white">Jugnoo</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-slate-300 hover:text-jugnoo-gold transition-colors">Services</a>
+                    <a href="#ai-architect"
+                        class="text-slate-300 hover:text-jugnoo-gold transition-colors flex items-center gap-1"><i
+                            class="fa-solid fa-wand-magic-sparkles text-xs"></i> AI Design</a>
+                    <a href="#about" class="text-slate-300 hover:text-jugnoo-gold transition-colors">Why Jugnoo</a>
+                    <a href="#process" class="text-slate-300 hover:text-jugnoo-gold transition-colors">How it Works</a>
+                    <a href="#contact"
+                        class="px-6 py-2 rounded-full bg-jugnoo-amber text-jugnoo-black font-bold hover:bg-jugnoo-gold transition-all transform hover:scale-105 shadow-lg shadow-amber-500/20">
+                        Get Quote
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                        class="text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-jugnoo-dark border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#services"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-jugnoo-gold">Services</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-jugnoo-gold">Why
+                    Jugnoo</a>
+                <a href="#contact"
+                    class="block w-full text-center mt-4 px-5 py-3 rounded-md font-bold bg-jugnoo-amber text-jugnoo-black">Get
+                    Free Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-pattern">
+        <!-- Glow effects -->
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-jugnoo-amber/20 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-bounce delay-700">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                <span class="text-sm font-medium text-slate-300">Now serving Raipur & Bhilai</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight mb-8">
+                Your Home, <br>
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-jugnoo-gold to-jugnoo-amber">Intelligently
+                    Lit.</span>
+            </h1>
+
+            <p class="mt-4 text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+                Experience the magic of complete home automation. Like a firefly in the dark, Jugnoo brings smart
+                lighting, security, and comfort to your doorstep in Raipur.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact"
+                    class="px-8 py-4 rounded-full bg-gradient-to-r from-jugnoo-amber to-jugnoo-gold text-jugnoo-black font-bold text-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all transform hover:-translate-y-1">
+                    Book Free Demo
+                </a>
+                <a href="tel:+919876543210"
+                    class="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Call Now
+                </a>
+            </div>
+
+            <!-- Dashboard Mockup Image -->
+            <div class="mt-16 relative mx-auto max-w-5xl">
+                <div class="rounded-xl overflow-hidden shadow-2xl shadow-jugnoo-amber/20 border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1558002038-109177381795?q=80&w=2070&auto=format&fit=crop"
+                        alt="Smart Home Interface"
+                        class="w-full h-auto object-cover opacity-80 hover:opacity-100 transition-opacity duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-jugnoo-black to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 md:bottom-10 md:left-10 text-left">
+                        <p class="text-jugnoo-gold font-semibold uppercase tracking-wider text-sm">One App Control</p>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white">Seamless Integration</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Architect Section (Powered by Gemini) -->
+    <section id="ai-architect" class="py-20 bg-jugnoo-black relative border-t border-white/5">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
+        </div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block px-3 py-1 rounded-full bg-jugnoo-amber/10 text-jugnoo-gold text-sm font-semibold mb-4 border border-jugnoo-amber/20">
+                    <i class="fa-solid fa-sparkles mr-1"></i> Powered by Gemini AI
+                </span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Jugnoo AI Architect ✨</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Tell us about your home and lifestyle. Our AI will instantly generate a custom smart home plan
+                    tailored for Raipur's environment.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Input Side -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm">
+                    <label class="block text-slate-300 font-medium mb-3">Describe your home & needs:</label>
+                    <textarea id="user-prompt" rows="5"
+                        class="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors mb-4 placeholder-gray-600"
+                        placeholder="e.g., I have a 3BHK in Shankar Nagar. I live with my elderly parents. I want to save electricity and ensure their safety when I'm at work."></textarea>
+
+                    <button onclick="generateSmartPlan()" id="generate-btn"
+                        class="w-full bg-gradient-to-r from-jugnoo-amber to-jugnoo-gold text-jugnoo-black font-bold py-4 rounded-xl text-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span>✨ Generate My Plan</span>
+                    </button>
+                    <p class="text-xs text-slate-500 mt-3 text-center">It takes a few seconds to design your future
+                        home.</p>
+                </div>
+
+                <!-- Output Side -->
+                <div class="relative min-h-[400px]">
+                    <!-- Placeholder State -->
+                    <div id="result-placeholder"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-white/10 rounded-2xl">
+                        <i class="fa-solid fa-microchip text-4xl text-slate-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-slate-500">Your AI Plan Awaits</h3>
+                        <p class="text-slate-600 mt-2">Enter your details to see a custom recommendation.</p>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loading-state"
+                        class="hidden absolute inset-0 flex flex-col items-center justify-center bg-black/80 rounded-2xl z-20">
+                        <div
+                            class="w-16 h-16 border-4 border-jugnoo-amber border-t-transparent rounded-full animate-spin mb-4">
+                        </div>
+                        <p class="text-jugnoo-gold font-medium animate-pulse">Designing your smart home...</p>
+                    </div>
+
+                    <!-- Result State -->
+                    <div id="result-container"
+                        class="hidden bg-gradient-to-br from-gray-900 to-black border border-jugnoo-amber/30 rounded-2xl p-8 shadow-2xl overflow-y-auto max-h-[500px] custom-scrollbar">
+                        <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-full bg-jugnoo-gold flex items-center justify-center">
+                                <i class="fa-solid fa-robot text-jugnoo-black"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Your Smart Plan</h3>
+                                <p class="text-xs text-jugnoo-gold">Customized for you</p>
+                            </div>
+                        </div>
+                        <div id="ai-response"
+                            class="prose prose-invert prose-p:text-slate-300 prose-headings:text-white prose-strong:text-jugnoo-amber prose-li:text-slate-300">
+                            <!-- Content goes here -->
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10">
+                            <a href="#contact"
+                                class="block w-full text-center py-3 rounded-lg bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors">
+                                Get a Quote for this Plan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / About -->
+    <section id="about" class="py-20 bg-jugnoo-black overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 relative">
+                    <div
+                        class="absolute -inset-4 bg-gradient-to-r from-jugnoo-gold to-jugnoo-amber rounded-2xl blur-lg opacity-30">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1585252194600-b570d517c2d2?q=80&w=2070&auto=format&fit=crop"
+                        alt="Smart Switch" class="relative rounded-2xl border border-white/10 shadow-2xl">
+                </div>
+                <div class="lg:w-1/2">
+                    <h4 class="text-jugnoo-gold font-bold tracking-wide uppercase mb-2">Why Raipur Chooses Jugnoo</h4>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Local Service,<br>Global Technology.</h2>
+                    <p class="text-slate-400 mb-6 text-lg">
+                        Jugnoo isn't just a box-moving company. We are Raipur's premier system integrators. We
+                        understand the specific power conditions and construction styles of Chhattisgarh homes.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-jugnoo-amber mt-1 mr-3"></i>
+                            <span class="text-slate-300"><strong>48-Hour On-Site Support:</strong> We are based in
+                                Raipur, not a call center in a metro.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-jugnoo-amber mt-1 mr-3"></i>
+                            <span class="text-slate-300"><strong>Retrofit Solutions:</strong> Make your existing home
+                                smart without rewiring or breaking walls.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-jugnoo-amber mt-1 mr-3"></i>
+                            <span class="text-slate-300"><strong>Premium Brands:</strong> We partner with reliable
+                                brands like Philips Hue, Schneider, and Crabtree.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-jugnoo-black to-jugnoo-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white mb-3">Ready to Light Up Your Home?</h2>
+                    <p class="text-slate-400">Fill out the form below for a free site visit in Raipur.</p>
+                </div>
+
+                <form class="space-y-6"
+                    onsubmit="event.preventDefault(); alert('Thanks for contacting Jugnoo! We will call you shortly to schedule your site visit.');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Name</label>
+                            <input type="text" placeholder="Your Name"
+                                class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"
+                                required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+                            <input type="tel" placeholder="+91 98XXX XXXXX"
+                                class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"
+                                required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Area in Raipur</label>
+                        <select
+                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors">
+                            <option>Shankar Nagar</option>
+                            <option>Civil Lines</option>
+                            <option>Pandri</option>
+                            <option>Devendra Nagar</option>
+                            <option>Samta Colony</option>
+                            <option>Naya Raipur</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Message (Optional)</label>
+                        <textarea rows="4" placeholder="Tell us about your requirements..."
+                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-jugnoo-amber to-jugnoo-gold text-jugnoo-black font-bold py-4 rounded-lg text-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all transform hover:-translate-y-1">
+                        Request Free Site Visit
+                    </button>
+
+                    <p class="text-center text-xs text-slate-500 mt-4">We respect your privacy. No spam.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-jugnoo-gold flex items-center justify-center">
+                            <i class="fa-solid fa-lightbulb text-jugnoo-black text-sm"></i>
+                        </div>
+                        <span class="font-bold text-2xl text-white">Jugnoo</span>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-sm">
+                        Jugnoo Automation brings cutting-edge smart home technology to Chhattisgarh. We transform
+                        ordinary houses into intelligent homes.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-jugnoo-gold transition-colors">Smart Lighting</a></li>
+                        <li><a href="#" class="hover:text-jugnoo-gold transition-colors">Home Security</a></li>
+                        <li><a href="#" class="hover:text-jugnoo-gold transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-jugnoo-gold transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-jugnoo-amber"></i>
+                            <span>Office 102, Main Road,<br>Shankar Nagar, Raipur,<br>Chhattisgarh 492001</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-jugnoo-amber"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-jugnoo-amber"></i>
+                            <span>hello@jugnoo.in</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 mt-12 pt-8 text-center text-slate-500 text-sm">
+                &copy; 2024 Jugnoo Home Automation. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const apiKey = "AIzaSyCnqJYGsO930vu7WMUDNslbDuiGNaWzeZU";
+
+        async function generateSmartPlan() {
+            const promptInput = document.getElementById('user-prompt').value;
+            const generateBtn = document.getElementById('generate-btn');
+            const placeholder = document.getElementById('result-placeholder');
+            const loading = document.getElementById('loading-state');
+            const resultContainer = document.getElementById('result-container');
+            const aiResponse = document.getElementById('ai-response');
+
+            if (!promptInput.trim()) {
+                alert("Please describe your home first!");
+                return;
+            }
+
+            // UI State: Loading
+            generateBtn.disabled = true;
+            generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            placeholder.classList.add('hidden');
+            resultContainer.classList.add('hidden');
+            loading.classList.remove('hidden');
+
+            const systemPrompt = `You are the lead automation architect for 'Jugnoo Home Automation' in Raipur, India.
+            
+            Your goal is to take a customer's description of their home and lifestyle and generate a structured 'Smart Home Blueprint'.
+            
+            Guidelines:
+            1. **Raipur Context:** Mention things relevant to the region (e.g., managing power cuts with smart inverters, cooling strategies for 45°C heat, dust protection).
+            2. **Tone:** Professional, technological, yet warm and Indian-hospitable.
+            3. **Structure:**
+               - **Analysis:** Briefly summarize their needs.
+               - **Recommended Setup:** Bullet points of specific devices (e.g., "Smart IR Blaster for Old ACs", "Motion Sensors for Hallway").
+               - **The Jugnoo Advantage:** Why this specific setup helps them (Energy saving, Safety).
+            4. **Formatting:** Use Markdown (bolding, lists). Use emojis effectively (✨, 🏠, 🔒).
+            
+            User Input: "${promptInput}"`;
+
+            try {
+                const responseText = await callGeminiWithBackoff(systemPrompt);
+
+                // Parse Markdown and display
+                aiResponse.innerHTML = marked.parse(responseText);
+
+                loading.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error:", error);
+                loading.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                placeholder.innerHTML = `<div class="text-red-400"><i class="fa-solid fa-circle-exclamation text-3xl mb-2"></i><br>Oops! Connectivity issue. Please try again.</div>`;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        async function callGeminiWithBackoff(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const delays = [1000, 2000, 4000, 8000, 16000];
+
+            for (let i = 0; i <= delays.length; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (e) {
+                    if (i === delays.length) throw e; // Rethrow after last attempt
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
