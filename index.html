@@ -50,6 +50,46 @@
             background-image: radial-gradient(#F59E0B 1px, transparent 1px);
             background-size: 50px 50px;
         }
+
+        /* Custom Styling for AI Response */
+        #ai-response h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        #ai-response ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        #ai-response li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        #ai-response li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            color: #F59E0B;
+        }
+
+        #ai-response strong {
+            color: #F59E0B;
+            font-weight: 600;
+        }
+
+        #ai-response p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -117,7 +157,7 @@
             <div
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-bounce delay-700">
                 <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                <span class="text-sm font-medium text-slate-300">Now serving Raipur & Bhilai</span>
+                <span class="text-sm font-medium text-slate-300">Now serving Raipur</span>
             </div>
 
             <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight mb-8">
@@ -287,12 +327,20 @@
                     <p class="text-slate-400">Fill out the form below for a free site visit in Raipur.</p>
                 </div>
 
-                <form class="space-y-6"
-                    onsubmit="event.preventDefault(); alert('Thanks for contacting Jugnoo! We will call you shortly to schedule your site visit.');">
+                <div id="contact-success" class="hidden text-center py-10">
+                    <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-check text-4xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Request Received!</h3>
+                    <p class="text-slate-400">Thank you, <span id="user-name-display" class="text-jugnoo-gold"></span>.
+                        We will call you shortly to schedule your free site visit.</p>
+                </div>
+
+                <form id="contact-form" class="space-y-6" onsubmit="handleContactSubmit(event)">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-2">Name</label>
-                            <input type="text" placeholder="Your Name"
+                            <input type="text" id="contact-name" placeholder="Your Name"
                                 class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"
                                 required>
                         </div>
@@ -306,22 +354,38 @@
 
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2">Area in Raipur</label>
-                        <select
-                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors">
-                            <option>Shankar Nagar</option>
-                            <option>Civil Lines</option>
-                            <option>Pandri</option>
-                            <option>Devendra Nagar</option>
-                            <option>Samta Colony</option>
-                            <option>Naya Raipur</option>
-                            <option>Other</option>
-                        </select>
+                        <div class="flex gap-2">
+                            <select
+                                class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors">
+                                <option>Shankar Nagar</option>
+                                <option>Civil Lines</option>
+                                <option>Pandri</option>
+                                <option>Devendra Nagar</option>
+                                <option>Samta Colony</option>
+                                <option>Naya Raipur</option>
+                                <option>Other</option>
+                            </select>
+                            <button type="button" id="location-btn" onclick="captureLocation()"
+                                class="whitespace-nowrap px-4 py-3 rounded-lg bg-white/10 text-jugnoo-gold border border-jugnoo-gold/30 hover:bg-jugnoo-gold/10 transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-location-crosshairs"></i> <span>Share Location</span>
+                            </button>
+                        </div>
+                        <p id="location-status" class="text-xs text-green-400 mt-1 hidden"><i
+                                class="fa-solid fa-check"></i> Location captured!</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-2">Message (Optional)</label>
-                        <textarea rows="4" placeholder="Tell us about your requirements..."
-                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"></textarea>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Full Address</label>
+                        <textarea id="contact-address" rows="2" placeholder="House No, Street, Landmark..."
+                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"
+                            required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                        <textarea id="contact-message" rows="4" placeholder="Tell us about your requirements..."
+                            class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-jugnoo-gold focus:ring-1 focus:ring-jugnoo-gold transition-colors"
+                            required></textarea>
                     </div>
 
                     <button type="submit"
@@ -386,8 +450,18 @@
         </div>
     </footer>
 
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        const apiKey = "AIzaSyCnqJYGsO930vu7WMUDNslbDuiGNaWzeZU";
+        const apiKey = "AIzaSyCnqJYGsO930vu7WMUDnslbDuiGNaWzeZU";
+
+        // Supabase Configuration (From CRM Secrets)
+        const SUPABASE_URL = "https://jiwjcittpzjsgnmecuaz.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppd2pjaXR0cHpqc2dubWVjdWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM5ODYxMjksImV4cCI6MjA3OTU2MjEyOX0.d7MLjBBzFHNmGyS3VRqoo1EjoZ6xtzabUenOGYR2YoE";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let capturedLocation = "Web Inquiry"; // Default if location not shared
 
         async function generateSmartPlan() {
             const promptInput = document.getElementById('user-prompt').value;
@@ -409,18 +483,37 @@
             resultContainer.classList.add('hidden');
             loading.classList.remove('hidden');
 
-            const systemPrompt = `You are the lead automation architect for 'Jugnoo Home Automation' in Raipur, India.
+            const systemPrompt = `You are a visionary Home Automation Architect for 'Jugnoo' in Raipur.
             
-            Your goal is to take a customer's description of their home and lifestyle and generate a structured 'Smart Home Blueprint'.
+            Your goal is to **PAINT A PICTURE** of their future life (Persuasive) while keeping the output **visually stunning and easy to scan** (Visual).
             
-            Guidelines:
-            1. **Raipur Context:** Mention things relevant to the region (e.g., managing power cuts with smart inverters, cooling strategies for 45°C heat, dust protection).
-            2. **Tone:** Professional, technological, yet warm and Indian-hospitable.
-            3. **Structure:**
-               - **Analysis:** Briefly summarize their needs.
-               - **Recommended Setup:** Bullet points of specific devices (e.g., "Smart IR Blaster for Old ACs", "Motion Sensors for Hallway").
-               - **The Jugnoo Advantage:** Why this specific setup helps them (Energy saving, Safety).
-            4. **Formatting:** Use Markdown (bolding, lists). Use emojis effectively (✨, 🏠, 🔒).
+            **Content Guidelines (The "Soul"):**
+            1.  **The Hook:** Start with an evocative sentence. "Imagine walking into your home in Shankar Nagar after a long day..."
+            2.  **The Transformation:** Describe the *lifestyle change*, not just the tech. (e.g., "Lights that welcome you," not "Motion sensors").
+            3.  **Raipur Touch:** Mention local context (heat, power cuts).
+            4.  **Service Area:** We ONLY serve Raipur, Chhattisgarh.
+            
+            **Visual Formatting Rules (The "Body"):**
+            1.  **Headings:** Use '###' for section headers. Make them catchy.
+            2.  **Emojis:** Start EVERY bullet point with a relevant emoji.
+            3.  **Bolding:** Bold **key benefits** and **device names**.
+            4.  **Spacing:** Keep paragraphs to 1-2 sentences max. NO WALLS OF TEXT.
+            
+            **Required Structure:**
+            
+            ### 🌟 The Vision
+            [Evocative hook about their new lifestyle]
+            
+            ### 🏠 Your Transformation
+            *   💡 **[Feature]:** [Benefit description focusing on lifestyle/comfort]
+            *   ❄️ **[Feature]:** [Benefit description - mention Raipur heat/context]
+            *   🔐 **[Feature]:** [Benefit description - safety/peace of mind]
+            
+            ### ⚡ Why Jugnoo?
+            [One punchy sentence about local service/support in Raipur]
+            
+            ### 🚀 Next Steps
+            This isn't just a plan; it's a lifestyle upgrade. Let's make it real. Book your free site visit below.
             
             User Input: "${promptInput}"`;
 
@@ -463,6 +556,104 @@
                     if (i === delays.length) throw e; // Rethrow after last attempt
                     await new Promise(resolve => setTimeout(resolve, delays[i]));
                 }
+            }
+        }
+
+        function captureLocation() {
+            const btn = document.getElementById('location-btn');
+            const status = document.getElementById('location-status');
+
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by your browser.");
+                return;
+            }
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
+            btn.disabled = true;
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    capturedLocation = `https://www.google.com/maps?q=${lat},${lng}`;
+
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Captured';
+                    btn.classList.add('bg-green-500/20', 'text-green-400', 'border-green-500/30');
+                    btn.classList.remove('text-jugnoo-gold', 'border-jugnoo-gold/30');
+                    status.classList.remove('hidden');
+                },
+                (error) => {
+                    console.error("Location Error:", error);
+                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Failed';
+                    btn.disabled = false;
+                    alert("Unable to retrieve your location. Please check your browser permissions.");
+                }
+            );
+        }
+
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+
+            // 1. Capture Data
+            const name = document.getElementById('contact-name').value;
+            const phone = document.querySelector('input[type="tel"]').value; // Using querySelector as ID wasn't unique/present for phone
+            const area = document.querySelector('select').value;
+            const fullAddress = document.getElementById('contact-address').value;
+            const message = document.getElementById('contact-message').value;
+
+            // 2. Validate Phone (Digits, spaces, +, - only)
+            const phoneRegex = /^[0-9+\-\s]+$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid phone number (digits, spaces, +, - only).");
+                return;
+            }
+
+            // 3. Validate Location (Mandatory)
+            if (capturedLocation === "Web Inquiry") {
+                alert("Please click 'Share Location' so we can find your home easily.");
+                return;
+            }
+
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Sending...";
+
+            try {
+                // 3. Map Data to CRM Schema
+                // CRM Schema: name, phone, address, status, created_at, location
+                const crmData = {
+                    name: name,
+                    phone: phone,
+                    address: `${fullAddress}, ${area}\nMessage: ${message}`, // Combine Address, Area & Message
+                    status: "New Lead", // Updated to "New Lead" per user request
+                    created_at: new Date().toISOString(),
+                    location: capturedLocation // Use captured location or default "Web Inquiry"
+                };
+
+                // 4. Insert into Supabase
+                const { data, error } = await supabaseClient
+                    .from('clients')
+                    .insert([crmData])
+                    .select();
+
+                if (error) throw error;
+
+                // 5. Success Feedback
+                document.getElementById('user-name-display').textContent = name;
+                document.getElementById('contact-form').classList.add('hidden');
+                document.getElementById('contact-success').classList.remove('hidden');
+
+                // Scroll to success message
+                document.getElementById('contact-success').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error("Submission Error:", error);
+                alert("Sorry, there was an error sending your request. Please try again or call us directly.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
             }
         }
     </script>
